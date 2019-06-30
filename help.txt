@@ -1,0 +1,8 @@
+`
+List of commands `:speech_balloon:
+`
+!hello  - hello (user)!
+!avatar - sends link to user avatar
+!am     - ramdom animeme
+!pat    - head pat
+`
