@@ -1,0 +1,1 @@
+Discord Chat Bot that can be used in Discord servers
