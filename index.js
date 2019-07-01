@@ -1,10 +1,10 @@
 require('dotenv').config();
 const token = process.env.DISCORD_TOKEN;
-const prefix = process.env.PREFIX
+const prefix = process.env.PREFIX;
+const twitchURL = process.env.TWITCH_URL;
 const Discord = require('discord.js');
 
 var fs = require('fs');
-var helpList = fs.readFileSync('help.txt', 'utf8');
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
@@ -17,10 +17,21 @@ for (const file of commandFiles) {
 }
 
 client.on('ready', () => {
-    console.log('Beep Boop Bot is Online');
+    console.log('beep');
+    client.user.setPresence({
+        game: {
+            name: "Use !help",
+            url: twitchURL
+        }
+    });
 });
 
 client.on('message', (message) => {
+    //If author != owner or bot
+    if (message.author.id != 594902585811664937 && message.author.id != 184114692631822337) {
+        message.channel.send(`You should not be here ${message.author} !`);
+    }
+    
     if (!message.content.startsWith(prefix) || message.author.bot) return;
 
     const args = message.content.slice(prefix.length).split(/ +/);
@@ -35,10 +46,7 @@ client.on('message', (message) => {
         message.reply('Non-Existent Command! Use !help to view a list of commands.');
     }
 
-    //If author != owner or bot
-    if (message.author.id != 594902585811664937 && message.author.id != 184114692631822337) {
-        message.channel.send(`You should not be here ${message.author} !`);
-    }
+
 
 
 });
