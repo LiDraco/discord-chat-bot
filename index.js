@@ -1,64 +1,43 @@
 require('dotenv').config();
 const token = process.env.DISCORD_TOKEN;
+const prefix = process.env.PREFIX
 const Discord = require('discord.js');
-
-const client = new Discord.Client();
 
 var fs = require('fs');
 var helpList = fs.readFileSync('help.txt', 'utf8');
+
+const client = new Discord.Client();
+client.commands = new Discord.Collection();
+
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+
+for (const file of commandFiles) {
+    const command = require(`./commands/${file}`);
+    client.commands.set(command.name, command);
+}
 
 client.on('ready', () => {
     console.log('Beep Boop Bot is Online');
 });
 
-client.on('message', (msg) => {
+client.on('message', (message) => {
+    if (!message.content.startsWith(prefix) || message.author.bot) return;
 
-    //!hello
-    if (msg.content == '!hello') {
-        msg.channel.send(`hello ${msg.author}!`);
-    }
+    const args = message.content.slice(prefix.length).split(/ +/);
+    const command = args.shift().toLowerCase();
 
-    //!avatar
-    if (msg.content === '!avatar') {
-        msg.reply(msg.author.avatarURL);
-    }
+    if (!client.commands.has(command)) return;
 
-    //!help
-    if (msg.content === '!help') {
-        msg.channel.send(helpList);
-    }
-
-    //!pat
-    if (msg.content === '!pat') {
-        const pat = [
-            'https://i.imgur.com/MB09aRS.jpg'
-        ];
-        msg.channel.send(pat);
-    }
-
-    //!am
-    if (msg.content === '!am') {
-        const am = [
-            'https://i.imgur.com/RvZhMYS.jpg',
-            'https://i.imgur.com/bmBYaFe.jpg',
-            'https://i.imgur.com/LfJiio6.jpg',
-            'https://i.imgur.com/4GXG2uf.jpg'
-        ];
-
-        //Prevents an image from being sent back to back
-        var animePicture = parseInt(Math.floor(Math.random() * am.length));
-        var comparePicture = parseInt(Math.floor(Math.random() * am.length));
-        if (animePicture == comparePicture) {
-            animePicture = parseInt(Math.floor(Math.random() * am.length));
-        }
-        msg.channel.send({
-            file: am[animePicture]
-        });
+    try {
+        client.commands.get(command).execute(message, args);
+    } catch (error) {
+        console.error(error);
+        message.reply('Non-Existent Command! Use !help to view a list of commands.');
     }
 
     //If author != owner or bot
-    if (msg.author.id != 594902585811664937 && msg.author.id != 184114692631822337) {
-        msg.channel.send(`You should not be here ${msg.author} !`);
+    if (message.author.id != 594902585811664937 && message.author.id != 184114692631822337) {
+        message.channel.send(`You should not be here ${message.author} !`);
     }
 
 
