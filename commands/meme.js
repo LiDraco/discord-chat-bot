@@ -1,6 +1,6 @@
 module.exports = {
-    name: 'am',
-    description: 'am',
+    name: 'meme',
+    description: 'meme',
     execute(message) {
         const am = [
             'https://i.imgur.com/RvZhMYS.jpg',

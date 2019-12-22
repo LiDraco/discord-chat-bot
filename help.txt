@@ -2,10 +2,11 @@
 List of commands
 ```
 ```
-!am     - ramdom animeme  
-!avatar - sends link to user avatar         
+!avatar - sends link to user avatar 
+!ded    - ded         
 !hello  - hello (user)!   
-!help   - list commands                        
-!pat    - head pat    
-!ded    - ded              
+!help   - list commands
+!invite - create server invite
+!meme   - ramdom animeme  
+!pat    - head pat            
 ```
