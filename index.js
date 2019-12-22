@@ -1,4 +1,4 @@
-require('dotenv').config();
+//require('dotenv').config();
 const token = process.env.DISCORD_TOKEN;
 const prefix = process.env.PREFIX;
 const twitchURL = process.env.TWITCH_URL;
