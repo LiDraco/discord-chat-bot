@@ -6,5 +6,6 @@ List of commands
 !avatar - sends link to user avatar         
 !hello  - hello (user)!   
 !help   - list commands                        
-!pat    - head pat                  
+!pat    - head pat    
+!ded    - ded              
 ```
