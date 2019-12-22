@@ -27,10 +27,6 @@ client.on('ready', () => {
 });
 
 client.on('message', (message) => {
-    //If author != owner or bot
-    if (message.author.id != 594902585811664937 && message.author.id != 184114692631822337) {
-        message.channel.send(`You should not be here ${message.author} !`);
-    }
     
     if (!message.content.startsWith(prefix) || message.author.bot) return;
 
