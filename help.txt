@@ -2,7 +2,8 @@
 List of commands
 ```
 ```
-!avatar - sends link to user avatar 
+!avatar - gets user avatar
+!banner - gets user banner
 !emoji  - list all emojis on the server       
 !hello  - hello (user)!   
 !help   - list commands
