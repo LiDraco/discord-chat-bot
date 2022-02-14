@@ -3,11 +3,11 @@ List of commands
 ```
 ```
 !avatar - sends link to user avatar 
-!ded    - ded
 !emoji  - list all emojis on the server       
 !hello  - hello (user)!   
 !help   - list commands
 !invite - create server invite
 !meme   - ramdom animeme  
-!pat    - head pat            
+!pat    - head pat          
+!sheesh - SHEEEEEEEESH  
 ```
