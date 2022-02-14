@@ -9,7 +9,6 @@ List of commands
 !help   - list commands
 !invite - create server invite
 !laser  - konpeko
-!meme   - ramdom animeme  
 !pat    - head pat          
 !sheesh - SHEEEEEEEESH  
 !snipe  - sinon 
