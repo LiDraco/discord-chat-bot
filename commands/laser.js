@@ -1,6 +1,6 @@
 module.exports = {
-    name: 'pat',
-    description: 'pat!',
+    name: 'laser',
+    description: 'laser!',
     execute(message) {
         message.channel.send({ files: ["./media/laser.gif"] });
     },

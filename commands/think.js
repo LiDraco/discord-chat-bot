@@ -1,6 +1,6 @@
 module.exports = {
-    name: 'pat',
-    description: 'pat!',
+    name: 'think',
+    description: 'think!',
     execute(message) {
         message.channel.send({ files: ["./media/think.gif"] });
     },
