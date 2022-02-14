@@ -7,9 +7,9 @@ module.exports = {
         if(emojiList.length<2000){
             message.channel.send(emojiList);
         }else{
-            emojiList=emojiList.slice(0,emojiList.length/2)
+            const shortemojiList=emojiList.slice(0,emojiList.length/2)
             message.channel.send("Too many emojis!")
-            message.channel.send(emojiList)
+            message.channel.send(shortemojiList)
         }
     },
 };
