@@ -10,4 +10,5 @@ List of commands
 !meme   - ramdom animeme  
 !pat    - head pat          
 !sheesh - SHEEEEEEEESH  
+!snipe  - Sinon 
 ```
