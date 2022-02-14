@@ -7,8 +7,10 @@ List of commands
 !hello  - hello (user)!   
 !help   - list commands
 !invite - create server invite
+!laser  - konpeko
 !meme   - ramdom animeme  
 !pat    - head pat          
 !sheesh - SHEEEEEEEESH  
-!snipe  - Sinon 
+!snipe  - sinon 
+!think  - yubi yubi
 ```
