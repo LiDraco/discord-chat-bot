@@ -1,50 +1,37 @@
-//require('dotenv').config();
+require('dotenv').config();
+
 const token = process.env.DISCORD_TOKEN;
-const prefix = process.env.PREFIX;
-const twitchURL = process.env.TWITCH_URL;
-const Discord = require('discord.js');
 
-var fs = require('fs');
+const fs = require('node:fs');
+const path = require('node:path');
+const { Client, Collection, Events, GatewayIntentBits } = require('discord.js');
 
-const client = new Discord.Client();
-client.commands = new Discord.Collection();
+const client = new Client({ intents: [GatewayIntentBits.Guilds,GatewayIntentBits.GuildMessages,GatewayIntentBits.MessageContent] });
 
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+client.commands = new Collection();
+const commandsPath = path.join(__dirname, 'commands');
+const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
+
+const delay = ms => new Promise(res => setTimeout(res, ms));
+
 
 for (const file of commandFiles) {
-    const command = require(`./commands/${file}`);
-    client.commands.set(command.name, command);
+	const filePath = path.join(commandsPath, file);
+	const command = require(filePath);
+	client.commands.set(command.data.name, command);
 }
 
-client.on('ready', () => {
-    console.log('beep');
-    client.user.setPresence({
-        game: {
-            name: "Use !help",
-            url: twitchURL
-        }
-    });
+client.once(Events.ClientReady, () => {
+	console.log('Ready!');
 });
 
-client.on('message', (message) => {
-    
-    if (!message.content.startsWith(prefix) || message.author.bot) return;
+client.on('messageCreate', (message) => {
+	if (message.content.includes('x.com') || (message.content.includes('twitter.com')&&!message.content.includes('vxtwitter.com'))) {
+	const modifiedContent = message.content.replace(/(x\.com|twitter\.com)/g, 'vxtwitter.com');
+	 message.channel.send("from: " + message.author.username +"\n"+ modifiedContent);
+	 message.delete()
+	}
 
-    const args = message.content.slice(prefix.length).split(/ +/);
-    const command = args.shift().toLowerCase();
-
-    if (!client.commands.has(command)) return;
-
-    try {
-        client.commands.get(command).execute(message, args);
-    } catch (error) {
-        console.error(error);
-        message.reply('Non-Existent Command! Use !help to view a list of commands.');
-    }
-
-
-
-
-});
+  });
 
 client.login(token);
