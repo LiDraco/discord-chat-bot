@@ -27,7 +27,7 @@ client.once(Events.ClientReady, () => {
 
 client.on('messageCreate', (message) => {
 	if (message.content.includes('x.com') || (message.content.includes('twitter.com')&&!message.content.includes('vxtwitter.com'))) {
-	const modifiedContent = message.content.replace(/(x\.com|twitter\.com)/g, 'vxtwitter.com');
+	const modifiedContent = message.content.replace(/(x\.com|twitter\.com)/g, 'vxtwitter.com');	
 	 message.channel.send("from: " + message.author.username +"\n"+ modifiedContent);
 	 message.delete()
 	}
